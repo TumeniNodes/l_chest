@@ -36,6 +36,18 @@ local function hacky_swap_node(pos,name, param2)
 	meta:from_table(meta0)
 end
 
+local chest_formspec =
+					"size[8,9]" ..
+					default.gui_bg ..
+					default.gui_bg_img ..
+					default.gui_slots ..
+					"list[current_name;main;0,0.3;8,4;]" ..
+					"list[current_player;main;0,4.85;8,1;]" ..
+					"list[current_player;main;0,6.08;8,3;8]" ..
+					"listring[current_name;main]" ..
+					"listring[current_player;main]" ..
+					default.get_hotbar_bg(0,4.85)
+
 minetest.register_node(":default:chest", {
 	description = "Chest",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
@@ -53,10 +65,6 @@ minetest.register_node(":default:chest", {
 			local p = get_chest_neighborpos(pos, param2, "right")
 			meta:set_string("formspec",
 					"size[8,11.5]"..
-					--"background[-0.19,-0.25;9.41,12.2;large_chest_formspec.png]"..
-					--"bgcolor[#080808BB;true]"..
-					--"listcolors[#9990;#FFF7;#FFF0;#160816;#D4D2FF]"..
-					--"image_button_exit[9,0;1,1;;exit;X;true;true;]"..
 					default.gui_bg ..
 					default.gui_bg_img ..
 					default.gui_slots ..
@@ -75,10 +83,6 @@ minetest.register_node(":default:chest", {
 					default.gui_bg ..
 					default.gui_bg_img ..
 					default.gui_slots ..
-					--"background[-0.19,-0.25;9.41,12.2;large_chest_formspec.png]"..
-					--"bgcolor[#080808BB;true]"..
-					--"listcolors[#9990;#FFF7;#FFF0;#160816;#D4D2FF]"..
-					--"image_button_exit[9,0;1,1;;exit;X;true;true;]"..
 					"list[current_name;main;0,0;8,3;]"..
 					"list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";main;0,3;8,3;]"..
 					"list[current_player;main;0,7.4;8,3;8]"..
@@ -94,10 +98,6 @@ minetest.register_node(":default:chest", {
 					default.gui_bg ..
 					default.gui_bg_img ..
 					default.gui_slots ..
-					--"background[-0.19,-0.25;9.41,12.2;large_chest_formspec.png]"..
-					--"bgcolor[#080808BB;true]"..
-					--"listcolors[#9990;#FFF7;#FFF0;#160816;#D4D2FF]"..
-					--"image_button_exit[9,0;1,1;;exit;X;true;true;]"..
 					"list[current_name;main;0,0;8,3;]"..
 					"list[nodemeta:"..p.x..","..p.y..","..p.z..";main;0,3;8,3;]"..
 					"list[current_player;main;0,7.4;8,3;8]"..
@@ -112,10 +112,6 @@ minetest.register_node(":default:chest", {
 					default.gui_bg ..
 					default.gui_bg_img ..
 					default.gui_slots ..
-					--"background[-0.19,-0.25;9.41,12.2;large_chest_formspec.png]"..
-					--"bgcolor[#080808BB;true]"..
-					--"listcolors[#9990;#FFF7;#FFF0;#160816;#D4D2FF]"..
-					--"image_button_exit[9,0;1,1;;exit;X;true;true;]"..
 					"list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";main;0,0;8,3;]"..
 					"list[current_name;main;0,3;8,3;]"..
 					"list[current_player;main;0,7.4;8,3;8]"..
@@ -124,18 +120,7 @@ minetest.register_node(":default:chest", {
 					)
 			m:set_string("infotext", "Large Chest")
 		else
-			meta:set_string("formspec",
-					"size[8,9]" ..
-					default.gui_bg ..
-					default.gui_bg_img ..
-					default.gui_slots ..
-					"list[current_name;main;0,0.3;8,4;]" ..
-					"list[current_player;main;0,4.85;8,1;]" ..
-					"list[current_player;main;0,6.08;8,3;8]" ..
-					"listring[current_name;main]" ..
-					"listring[current_player;main]" ..
-					default.get_hotbar_bg(0,4.85)
-					)
+			meta:set_string("formspec", chest_formspec)
 			meta:set_string("infotext", "Chest")
 		end
 		local inv = meta:get_inventory()
@@ -194,18 +179,7 @@ minetest.register_node("l_chest:chest_left", {
 			return
 		end
 		local meta = minetest.env:get_meta(p)
-		meta:set_string("formspec",
-				"size[8,9]" ..
-					default.gui_bg ..
-					default.gui_bg_img ..
-					default.gui_slots ..
-					"list[current_name;main;0,0.3;8,4;]" ..
-					"list[current_player;main;0,4.85;8,1;]" ..
-					"list[current_player;main;0,6.08;8,3;8]" ..
-					"listring[current_name;main]" ..
-					"listring[current_player;main]" ..
-				default.get_hotbar_bg(0,4.85)
-				)
+		meta:set_string("formspec", chest_formspec)
 		meta:set_string("infotext", "Chest")
 		hacky_swap_node(p, "default:chest")
 	end,
