@@ -36,7 +36,7 @@ local function hacky_swap_node(pos,name, param2)
 	meta:from_table(meta0)
 end
 
-minetest.register_node("l_chest:chest", {
+minetest.register_node(":default:chest", {
 	description = "Chest",
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
 		"default_chest_side.png", "default_chest_side.png", "default_chest_front.png"},
@@ -48,7 +48,7 @@ minetest.register_node("l_chest:chest", {
 	on_construct = function(pos)
 		local param2 = minetest.env:get_node(pos).param2
 		local meta = minetest.env:get_meta(pos)
-		if minetest.env:get_node(get_chest_neighborpos(pos, param2, "right")).name == "l_chest:chest" then
+		if minetest.env:get_node(get_chest_neighborpos(pos, param2, "right")).name == "default:chest" then
 			minetest.env:set_node(pos, {name="l_chest:chest_right",param2=param2})
 			local p = get_chest_neighborpos(pos, param2, "right")
 			meta:set_string("formspec",
@@ -86,7 +86,7 @@ minetest.register_node("l_chest:chest", {
 					default.get_hotbar_bg(0,4.85)
 					)
 			m:set_string("infotext", "Large Chest")
-		elseif minetest.env:get_node(get_chest_neighborpos(pos, param2, "left")).name == "l_chest:chest" then
+		elseif minetest.env:get_node(get_chest_neighborpos(pos, param2, "left")).name == "default:chest" then
 			minetest.env:set_node(pos, {name="l_chest:chest_left",param2=param2})
 			local p = get_chest_neighborpos(pos, param2, "left")
 			meta:set_string("formspec",
@@ -180,7 +180,7 @@ minetest.register_node("l_chest:chest_left", {
 		"default_chest_side.png", "default_chest_side_big.png^[transformFX", "default_chest_front_big.png"},
 	paramtype2 = "facedir",
 	groups = {choppy=2, oddly_breakable_by_hand=2,not_in_creative_inventory=1},
-	drop = "l_chest:chest",
+	drop = "default:chest",
 	is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
 	on_destruct = function(pos)
@@ -207,7 +207,7 @@ minetest.register_node("l_chest:chest_left", {
 				default.get_hotbar_bg(0,4.85)
 				)
 		meta:set_string("infotext", "Chest")
-		hacky_swap_node(p, "l_chest:chest")
+		hacky_swap_node(p, "default:chest")
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		local meta = minetest.env:get_meta(pos)
@@ -242,7 +242,7 @@ minetest.register_node("l_chest:chest_right", {
 		"default_chest_side.png", "default_chest_side_big.png", "default_chest_front_big.png^[transformFX"},
 	paramtype2 = "facedir",
 	groups = {choppy=2, oddly_breakable_by_hand=2,not_in_creative_inventory=1},
-	drop = "l_chest:chest",
+	drop = "default:chest",
 	sounds = default.node_sound_wood_defaults(),
 	on_destruct = function(pos)
 		local m = minetest.env:get_meta(pos)
@@ -269,7 +269,7 @@ minetest.register_node("l_chest:chest_right", {
 				default.get_hotbar_bg(0,4.85)
 				)
 		meta:set_string("infotext", "Chest")
-		hacky_swap_node(p, "l_chest:chest")
+		hacky_swap_node(p, "default:chest")
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		local meta = minetest.env:get_meta(pos)
