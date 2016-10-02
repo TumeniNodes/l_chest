@@ -124,7 +124,7 @@ minetest.register_node(":default:chest", {
 			meta:set_string("infotext", "Chest")
 		end
 		local inv = meta:get_inventory()
-		inv:set_size("main", 8*3)
+		inv:set_size("main", 8*4)
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		local meta = minetest.env:get_meta(pos)
